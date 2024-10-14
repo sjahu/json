@@ -445,6 +445,14 @@ EOT
     assert_includes error.message, "source sequence is illegal/malformed utf-8"
   end
 
+  def test_valid_utf8_in_different_encoding
+    utf8_string = "€™"
+    wrong_encoding_string = utf8_string.b
+    # This behavior is historical. Not necessary desirable.
+    assert_equal utf8_string.to_json, wrong_encoding_string.to_json
+    assert_equal JSON.dump(utf8_string), JSON.dump(wrong_encoding_string)
+  end
+
   if defined?(JSON::Ext::Generator) and RUBY_PLATFORM != "java"
     def test_string_ext_included_calls_super
       included = false
