@@ -337,20 +337,9 @@ module JSON
         # Assumes !@ascii_only, !@script_safe
         if Regexp.method_defined?(:match?)
           private def fast_serialize_string(string, buf) # :nodoc:
-            if string.encoding == ::Encoding::UTF_8
-              unless string.valid_encoding?
-                raise GeneratorError, "source sequence is illegal/malformed utf-8"
-              end
-            else
-              utf8_string = string.dup.force_encoding(::Encoding::UTF_8)
-              string = if utf8_string.valid_encoding?
-                utf8_string
-              else
-                string.encode(::Encoding::UTF_8)
-              end
-            end
-
             buf << '"'.freeze
+            string = string.encode(::Encoding::UTF_8) unless string.encoding == ::Encoding::UTF_8
+
             if /["\\\x0-\x1f]/n.match?(string)
               buf << string.gsub(/["\\\x0-\x1f]/n, MAP)
             else
@@ -361,19 +350,6 @@ module JSON
         else
           # Ruby 2.3 compatibility
           private def fast_serialize_string(string, buf) # :nodoc:
-            if string.encoding == ::Encoding::UTF_8
-              unless string.valid_encoding?
-                raise GeneratorError, "source sequence is illegal/malformed utf-8"
-              end
-            else
-              utf8_string = string.dup.force_encoding(::Encoding::UTF_8)
-              string = if utf8_string.valid_encoding?
-                utf8_string
-              else
-                string.encode(::Encoding::UTF_8)
-              end
-            end
-
             buf << string.to_json(self)
           end
         end
@@ -539,16 +515,6 @@ module JSON
               end
               string = self
             else
-              # Since the `json` gem was initially written for Ruby 1.8
-              # before strings had encoding, it used to do its own UTF-8
-              # validation direction on bytes and never really considered
-              # the string declared encoding. So passing a ASCII-8BIT string
-              # worked as long as the bytes were valid UTF-8
-              # We may want to deprecate this, but we should emit warnings first.
-              utf8_string = dup.force_encoding(::Encoding::UTF_8)
-              if utf8_string.valid_encoding?
-                return utf8_string.to_json(state, *args)
-              end
               string = encode(::Encoding::UTF_8)
             end
             if state.ascii_only?
