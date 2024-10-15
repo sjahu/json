@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
   s.files = [
     "CHANGES.md".freeze,
     "COPYING".freeze,
+    "BSDL".freeze,
+    "LEGAL".freeze,
     "README.md".freeze,
     "json_pure.gemspec".freeze,
     "lib/json.rb".freeze,
