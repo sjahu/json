@@ -14,7 +14,7 @@ spec = Gem::Specification.new do |s|
 
   s.platform = 'java'
 
-  s.files = Dir["lib/**/*", "LICENSE"]
+  s.files = Dir["lib/**/*", "COPYING"]
 
   s.homepage = "https://ruby.github.io/json"
   s.metadata = {

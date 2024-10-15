@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--title".freeze, "JSON implementation for ruby".freeze, "--main".freeze, "README.md".freeze]
   s.files = [
     "CHANGES.md".freeze,
-    "LICENSE".freeze,
+    "COPYING".freeze,
     "README.md".freeze,
     "json_pure.gemspec".freeze,
     "lib/json.rb".freeze,
