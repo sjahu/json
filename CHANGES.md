@@ -341,7 +341,7 @@
   * Extension should at least be compatible with MRI, YARV and Rubinius.
 
 ## 2010-04-07 (1.2.4)
-  * Triger const_missing callback to make Rails' dynamic class loading work.
+  * Trigger const_missing callback to make Rails' dynamic class loading work.
 
 ## 2010-03-11 (1.2.3)
   * Added a `State#[]` method which returns an attribute's value in order to
