@@ -107,9 +107,9 @@ task(:set_env_pure) { ENV['JSON'] = 'pure' }
 
 UndocumentedTestTask.new do |t|
   t.name = 'do_test_pure'
-  t.libs << 'lib' << 'tests' << 'tests/lib'
+  t.libs << 'lib' << 'test' << 'test/lib'
   t.ruby_opts << "-rhelper"
-  t.test_files = FileList['tests/*_test.rb']
+  t.test_files = FileList['test/json/*_test.rb']
   t.verbose = true
   t.options = '-v'
 end
@@ -187,8 +187,8 @@ if defined?(RUBY_ENGINE) and RUBY_ENGINE == 'jruby'
 
   UndocumentedTestTask.new do |t|
     t.name = 'do_test_ext'
-    t.libs << 'lib' << 'tests'
-    t.test_files = FileList['tests/*_test.rb']
+    t.libs << 'lib' << 'test'
+    t.test_files = FileList['test/json/*_test.rb']
     t.verbose = true
     t.options = '-v'
   end
@@ -266,9 +266,9 @@ else
 
   UndocumentedTestTask.new do |t|
     t.name = 'do_test_ext'
-    t.libs << 'lib' << 'tests' << "tests/lib"
+    t.libs << 'lib' << 'test' << "test/lib"
     t.ruby_opts << '-rhelper'
-    t.test_files = FileList['tests/*_test.rb']
+    t.test_files = FileList['test/json/*_test.rb']
     t.verbose = true
     t.options = '-v'
   end
